@@ -13,8 +13,7 @@
     "clean": "pnpm --filter \"./packages/**\" clean && rimraf node_modules",
     "benchmark": "tsx scripts/benchmark.ts",
     "generate-data": "tsx scripts/generate-demo-data.ts",
-    "typecheck": "tsc --noEmit",
-    "prepublishOnly": "pnpm build"
+    "typecheck": "tsc --noEmit"
   },
   "keywords": [
     "table",
