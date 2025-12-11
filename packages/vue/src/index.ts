@@ -1,34 +1,65 @@
 /**
  * @ldesign/table-vue
- * Vue 3表格组件
+ * Vue 3 组件封装 for @ldesign/table-core
  */
 
-import type { App } from 'vue';
-import LTable from './components/LTable.vue';
-import LTableColumn from './components/LTableColumn.vue';
+import type { App, Plugin } from 'vue'
 
-// 导入样式
-import '@ldesign/table-styles/src/index.css';
+// 组件
+import LTable from './components/LTable.vue'
+
+// 组合式函数
+export * from './composables'
+
+// 从 core 重新导出类型
+export type {
+  ColumnDef,
+  EditableConfig,
+  ValidationRule,
+  FilterOption,
+  SortState,
+  FilterState,
+  TableState,
+  TableConfig,
+  PaginationConfig,
+  SelectionConfig,
+  ExpandConfig,
+  VirtualScrollConfig,
+  RowDragConfig,
+  ColumnDragConfig,
+  TreeConfig,
+  ThemeConfig,
+  LocaleConfig,
+  TableInstance,
+  TableEvents
+} from '@ldesign/table-core'
+
+// 从 core 重新导出工具
+export {
+  Table,
+  ThemeManager,
+  registerTheme,
+  getPresetTheme,
+  defaultTheme,
+  darkTheme,
+  compactTheme
+} from '@ldesign/table-core'
 
 // 导出组件
-export { LTable, LTableColumn };
+export { LTable }
 
-// 导出类型
-export type * from '@ldesign/table-core';
-
-// 导出composables
-export { useTable } from './composables/useTable';
-
-// 插件安装函数
-export function install(app: App) {
-  app.component('LTable', LTable);
-  app.component('LTableColumn', LTableColumn);
+// Vue 插件
+const LDesignTablePlugin: Plugin = {
+  install(app: App) {
+    app.component('LTable', LTable)
+  }
 }
 
-// 默认导出
-export default {
-  install,
-};
+export default LDesignTablePlugin
 
-
-
+// 声明全局组件类型
+declare module 'vue' {
+  export interface GlobalComponents {
+    LTable: typeof LTable
+  }
+}

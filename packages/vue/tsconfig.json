@@ -3,12 +3,12 @@
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": "./src",
+    "declaration": true,
+    "declarationMap": true,
+    "composite": true,
     "jsx": "preserve",
     "jsxImportSource": "vue"
   },
-  "include": ["src"],
+  "include": ["src/**/*", "src/**/*.vue"],
   "exclude": ["node_modules", "dist"]
 }
-
-
-

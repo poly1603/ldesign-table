@@ -1,34 +1,25 @@
-import { defineConfig } from 'vite';
-import { resolve } from 'path';
-import vue from '@vitejs/plugin-vue';
-import dts from 'vite-plugin-dts';
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import { resolve } from 'path'
 
 export default defineConfig({
-  plugins: [
-    vue(),
-    dts({
-      rollupTypes: true,
-      tsconfigPath: './tsconfig.json',
-    }),
-  ],
+  plugins: [vue()],
   build: {
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
-      name: 'LTableVue',
-      formats: ['es', 'cjs'],
+      name: 'LDesignTableVue',
       fileName: (format) => `index.${format === 'es' ? 'js' : 'cjs'}`,
+      formats: ['es', 'cjs']
     },
     rollupOptions: {
       external: ['vue', '@ldesign/table-core'],
       output: {
         globals: {
           vue: 'Vue',
-        },
-      },
+          '@ldesign/table-core': 'LDesignTable'
+        }
+      }
     },
-    sourcemap: true,
-  },
-});
-
-
-
+    sourcemap: true
+  }
+})
